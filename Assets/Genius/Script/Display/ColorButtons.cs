@@ -1,6 +1,5 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 using UnityEngine.UI;
 namespace Genius {
     public class ColorButtons : MonoBehaviour, IColorButtons
@@ -10,7 +9,8 @@ namespace Genius {
         private Image img;
         private Button btn;
         private Color mycolor;
-
+        private UnityAction myaction;
+        private string colorname;
 
         private bool interactable = true;
 
@@ -19,15 +19,19 @@ namespace Genius {
             img = GetComponent<Image>();
             btn = GetComponent<Button>();
             mycolor = img.color;
+            colorname = gameObject.name;
         }
-        
+        public void SetNewAction(UnityAction newaction){
+            myaction = newaction;
+        }
         //inspector
         public void Press()
         {
             if (interactable)
             {
-                //Inject
-                Debug.Log(id);
+                if(myaction!=null){
+                    myaction();
+                }
             }
         }
         public void Interactable(bool _interact)
@@ -50,6 +54,9 @@ namespace Genius {
                 img.color = changealpha;
 
             }
+        }
+        public string GetName(){
+            return colorname;
         }
     }
 

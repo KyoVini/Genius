@@ -1,47 +1,49 @@
-using System.Collections;
-using System.Collections.Generic;
+
 using UnityEngine;
 namespace Genius {
     public class GameHold : MonoBehaviour
     {
-
         private int maxcount = 15;
         private int currentcount = 0;
         private int blocklight = 0;
         private bool holdgame =false;
         private void Start() {
-            Debug.Log("start gamehold"+ GameManager.Instance.GetHoldState());
-            GameManager.Instance.GetHoldState().Attach(HoldGame);
+            GameManager.Instance.GetHoldState().Attach(Play);
+            GameManager.Instance.GetStartState().Attach(Stop);
+            GeniusManager.Instance.BlockturnOFF();
         }
-
         
         void FixedUpdate()
         {
             if(holdgame){
                 if (currentcount >= maxcount)
                 {
-                    currentcount =0;
+                    currentcount = 0;
+                    CommandsManager.Instance.turncommand.TurnOff(blocklight);
                     NextLigth();
                 }
                 if(currentcount == 0)
                 {
-                    GeniusManager.Instance.BlockturnON(blocklight,true);
+                    CommandsManager.Instance.turncommand.TurnOn(blocklight);
                 }
                 currentcount++;
-                
             }
         }
 
         private void NextLigth()
         {
             blocklight++;
-            if (blocklight >= GeniusManager.Instance.GetTotalBlocks())
+            if (blocklight >= 4)
             {
                 blocklight = 0;
             }
         }
-        public void HoldGame(){
+        
+        public void Play(){
             holdgame = true;
+        }
+        public void Stop(){
+            holdgame = false;
         }
 
     }

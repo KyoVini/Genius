@@ -1,9 +1,9 @@
 using UnityEngine;
 
 namespace Genius {
-    public class GameNewBlock
+    public class GameNewColor
     {
-        public static int NewBlock()
+        public static int RandomColor()
         {
             int random = Random.Range(0, 4);
             return random;
