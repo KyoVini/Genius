@@ -8,6 +8,9 @@ namespace Genius{
         public void HoldGame(){
             SetText("- Press to start -");
         }
+        public void InteractiveState(){
+            SetText("- Try the sequence -");
+        }
         public void StartGame(){
             SetText("- Remember the sequence -");
         }

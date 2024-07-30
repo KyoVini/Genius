@@ -7,7 +7,9 @@ namespace Genius
         public static GameManager Instance; 
         private IGameState holdstate= new GameState();
         private IGameState startstate= new GameState();
+        private IGameState interactivestate= new GameState();
         public int currentround =0;
+        
         private void Awake() {
              if (Instance != null && Instance != this)
             {
@@ -25,11 +27,15 @@ namespace Genius
         }
         public IGameState GetHoldState()=> holdstate;
         public IGameState GetStartState()=> startstate;
+        public IGameState GetInteractiveState()=> interactivestate;
         public void CallHoldState(){
             holdstate.Notify();
         }
         public void CallStartGameState(){
             startstate.Notify();
+        }
+        public void CallInteractiveState(){
+            interactivestate.Notify();
         }
 
         

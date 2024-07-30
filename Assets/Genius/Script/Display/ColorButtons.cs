@@ -9,10 +9,10 @@ namespace Genius {
         private Image img;
         private Button btn;
         private Color mycolor;
-        private UnityAction myaction;
+        private UnityAction<int> myaction;
         private string colorname;
 
-        private bool interactable = true;
+        private bool interactable = false;
 
         private void Awake()
         {
@@ -21,7 +21,7 @@ namespace Genius {
             mycolor = img.color;
             colorname = gameObject.name;
         }
-        public void SetNewAction(UnityAction newaction){
+        public void SetNewAction(UnityAction<int> newaction){
             myaction = newaction;
         }
         //inspector
@@ -30,7 +30,7 @@ namespace Genius {
             if (interactable)
             {
                 if(myaction!=null){
-                    myaction();
+                    myaction(id);
                 }
             }
         }

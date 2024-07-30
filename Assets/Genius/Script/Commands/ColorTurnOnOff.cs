@@ -12,5 +12,6 @@ namespace Genius{
         public void TurnOff(){
             GeniusManager.Instance.BlockturnOFF(id);
         }
+        
     }
 }

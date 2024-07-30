@@ -1,18 +1,17 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
-public class InteractiveState : MonoBehaviour
-{
-    // Start is called before the first frame update
-    void Start()
+namespace Genius {
+    public class InteractiveState : MonoBehaviour
     {
         
-    }
+        void Start()
+        {
+            
+        }
+        public void VerifyGame(){
 
-    // Update is called once per frame
-    void Update()
-    {
-        
+        }
+
     }
 }

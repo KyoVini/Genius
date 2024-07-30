@@ -8,15 +8,17 @@ namespace Genius{
         private int lastbutton;
         private int index =0;
         private List<UnityAction> commandlist = new List<UnityAction>();
-        
+        private UnityAction<int> GeniusSequence;
         private void Start() {
             GameManager.Instance.GetStartState().Attach(ShowSequence);
+            GeniusSequence = GeniusManager.Instance.AddInSequence;
         }
         
         public void SetNewColor(){
             lastbutton = GameNewColor.RandomColor();
             UnityAction command1 = () => CommandsManager.Instance.turncommand.TurnOn(lastbutton);
             UnityAction command2 = () => CommandsManager.Instance.turncommand.TurnOff(lastbutton);
+            GeniusSequence(lastbutton); 
             commandlist.Add(command1);
             commandlist.Add(command2);
         }
@@ -29,16 +31,12 @@ namespace Genius{
         }
         private void RepeatSequence(){
             if(index < commandlist.Count){
-                
                 commandlist[index]();
                 Invoke(nameof(RepeatSequence),timer);
                 index++;
             }else{
-                //fase de clique
-                Debug.Log("fim da fase");
+                GameManager.Instance.CallInteractiveState();
             }
-            
-
         }
 
         
