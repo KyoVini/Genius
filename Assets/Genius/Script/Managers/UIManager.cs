@@ -14,6 +14,7 @@ namespace Genius
 
             GameManager.Instance.GetHoldState().Attach(description.HoldGame);
             GameManager.Instance.GetStartState().Attach(description.StartGame);
+            GameManager.Instance.GetLoseState().Attach(description.LoseGame);
             GameManager.Instance.GetInteractiveState().Attach(description.InteractiveState);
 
             hitscreen.GetComponent<SimpleButton>().DefineButtonAction(GameManager.Instance.CallStartGameState);

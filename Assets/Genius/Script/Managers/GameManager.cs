@@ -8,6 +8,7 @@ namespace Genius
         private IGameState holdstate= new GameState();
         private IGameState startstate= new GameState();
         private IGameState interactivestate= new GameState();
+        private IGameState losestate= new GameState();
         public int currentround =0;
         
         private void Awake() {
@@ -28,6 +29,7 @@ namespace Genius
         public IGameState GetHoldState()=> holdstate;
         public IGameState GetStartState()=> startstate;
         public IGameState GetInteractiveState()=> interactivestate;
+        public IGameState GetLoseState()=> losestate;
         public void CallHoldState(){
             holdstate.Notify();
         }
@@ -36,6 +38,9 @@ namespace Genius
         }
         public void CallInteractiveState(){
             interactivestate.Notify();
+        }
+        public void CallLoseState(){
+            losestate.Notify();
         }
 
         

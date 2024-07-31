@@ -21,6 +21,9 @@ namespace Genius {
             mycolor = img.color;
             colorname = gameObject.name;
         }
+        public void SetId(int _id){
+            id=_id;
+        }
         public void SetNewAction(UnityAction<int> newaction){
             myaction = newaction;
         }

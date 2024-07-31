@@ -14,6 +14,10 @@ namespace Genius{
         public void StartGame(){
             SetText("- Remember the sequence -");
         }
+        
+        public void LoseGame(){
+            SetText("- Lose -");
+        }
         private void SetText(string newtext){
             if(description !=null){
                 description.text = newtext;

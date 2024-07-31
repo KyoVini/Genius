@@ -5,17 +5,18 @@ namespace Genius{
     public class PlayerSequence:MonoBehaviour
     {
         private float timer = 1.0f;
-        private int lastbutton;
+        //private int lastbutton;
         private int index =0;
         private List<UnityAction> commandlist = new List<UnityAction>();
         private UnityAction<int> GeniusSequence;
         private void Start() {
             GameManager.Instance.GetStartState().Attach(ShowSequence);
+            GameManager.Instance.GetLoseState().Attach(ClearSequence);
             GeniusSequence = GeniusManager.Instance.AddInSequence;
         }
         
         public void SetNewColor(){
-            lastbutton = GameNewColor.RandomColor();
+            int lastbutton = GameNewColor.RandomColor();
             UnityAction command1 = () => CommandsManager.Instance.turncommand.TurnOn(lastbutton);
             UnityAction command2 = () => CommandsManager.Instance.turncommand.TurnOff(lastbutton);
             GeniusSequence(lastbutton); 
@@ -32,11 +33,15 @@ namespace Genius{
         private void RepeatSequence(){
             if(index < commandlist.Count){
                 commandlist[index]();
-                Invoke(nameof(RepeatSequence),timer);
                 index++;
+                Invoke(nameof(RepeatSequence),timer);                
             }else{
                 GameManager.Instance.CallInteractiveState();
             }
+        }
+        public void ClearSequence(){
+            commandlist.Clear();
+            index =0;
         }
 
         
